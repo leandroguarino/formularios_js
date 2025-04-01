@@ -1,0 +1,13 @@
+.form-grupo{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+.form-grupo input, .form-grupo textarea{
+    border: 1px solid #009;
+    border-radius: 10px;
+    padding: 10px;
+}
+html{
+    font-family: sans-serif;
+}
