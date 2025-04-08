@@ -7,16 +7,27 @@
   <link href="css/style.css" rel="stylesheet" />
   <script>
     function salvar() {
-        let nome = document.getElementById("nome").value
-        let preco = document.getElementById("preco").value
-        let descricao = document.getElementById("descricao").value
+        let nome = document.getElementById("nome").value.trim()
+        let preco = document.getElementById("preco").value.trim()
+        let descricao = document.getElementById("descricao").value.trim()
 
-        alert(nome)
-        alert(preco)
-        alert(descricao)
+        if (nome == "" || nome.length < 3) {
+          //alert("Preencha o nome do produto")
+          document.getElementById("erro-nome").style.display = "block"
+          // return false
+        }
+        if (preco == "" || preco <= 0){
+          //alert("Preencha o preço do produto")
+          document.getElementById("erro-preco").style.display = "block"
+          return false
+        }
 
         alert("O produto foi salvo com sucesso")
         return false; // Não vai enviar o formulário
+    }
+
+    function limparErro(id){
+      document.getElementById(id).style.display = "none"
     }
   </script>
 </head>
@@ -26,14 +37,16 @@
   <form id="form-cadastro" method="post" onsubmit="return salvar()">
     <div class="form-grupo">
       <label for="nome">Nome do Produto</label>
-      <input type="text" name="nome" id="nome" maxlength="150" />
+      <input type="text" name="nome" id="nome" maxlength="150" onkeydown="limparErro('erro-nome')" />
+      <div class="erro" id="erro-nome">Preencha o nome do produto</div>
     </div>
     <div class="form-grupo">
       <label for="preco">Preço</label>
-      <input type="number" name="preco" id="preco" />
+      <input type="number" name="preco" id="preco" step="0.1" onkeydown="limparErro('erro-preco')" />
+      <div class="erro" id="erro-preco">Preencha o preço</div>
     </div>
     <div class="form-grupo">
-      <label for="descricao">Descrição</label>
+      <label for="descricao">Descrição (opcional)</label>
       <textarea name="descricao" id="descricao" rows="5" cols="40"></textarea>
     </div>
     <div class="form-grupo">
