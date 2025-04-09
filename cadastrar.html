@@ -6,6 +6,8 @@
   <title>Restaurante do Veneno - Cadastrar produtos</title>
   <link href="css/style.css" rel="stylesheet" />
   <script>
+    let produtos = []
+    
     function salvar() {
         let nome = document.getElementById("nome").value.trim()
         let preco = document.getElementById("preco").value.trim()
@@ -14,7 +16,7 @@
         if (nome == "" || nome.length < 3) {
           //alert("Preencha o nome do produto")
           document.getElementById("erro-nome").style.display = "block"
-          // return false
+          return false
         }
         if (preco == "" || preco <= 0){
           //alert("Preencha o preço do produto")
@@ -22,8 +24,30 @@
           return false
         }
 
-        alert("O produto foi salvo com sucesso")
+        //cria o objeto json do novo produto
+        let novoProduto = {
+          "nome": nome,
+          "preco": preco,
+          "descricao": descricao
+        }
+
+        //adiciona o novo produto à lista de produtos
+        produtos.push(novoProduto)
+        console.log(produtos)
+
+        document.getElementById("mensagem").style.display = "flex"
+        setTimeout(function(){
+          document.getElementById("mensagem").style.display = "none"
+        }, 1000)
+        limparForm()
         return false; // Não vai enviar o formulário
+    }
+
+    function limparForm(){
+      document.getElementById("nome").value = ""
+      document.getElementById("preco").value = ""
+      document.getElementById("descricao").value = ""
+      document.getElementById("nome").focus()
     }
 
     function limparErro(id){
@@ -53,5 +77,9 @@
       <input type="submit" value="Salvar" />
     </div>
   </form>
+
+  <div id="mensagem">
+    <p>Produto cadastrado com sucesso.</p>
+  </div>
 </body>
 </html>

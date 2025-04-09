@@ -13,4 +13,19 @@ html{
 }
 .erro{
     display: none;
+    color: #c00;
+    margin-top: 5px;
+}
+#mensagem{
+    display: none;
+    width: 400px;
+    height: 200px;
+    text-align: center;
+    border: 1px solid #000;
+    position: fixed;
+    top: calc(50% - 100px);
+    left: calc(50% - 200px);
+    background-color: #0c0;
+    align-items: center;
+    justify-content: center;
 }
