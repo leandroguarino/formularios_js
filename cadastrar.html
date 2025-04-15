@@ -58,6 +58,29 @@
 <body>
   <a href="index.html">Voltar</a>
   <h1>Cadastro de Produtos</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pizza Calabacon</td>
+        <td>R$ 67,00</td>
+        <td>Muita calabresa, só no meio</td>
+        <td>
+          <button>Alterar</button>
+          <button>Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
   <form id="form-cadastro" method="post" onsubmit="return salvar()">
     <div class="form-grupo">
       <label for="nome">Nome do Produto</label>
