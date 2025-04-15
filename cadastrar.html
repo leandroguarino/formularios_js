@@ -40,7 +40,19 @@
           document.getElementById("mensagem").style.display = "none"
         }, 1000)
         limparForm()
+
+        //recarregar a lista de produtos
+        carregarProdutos()
+
         return false; // Não vai enviar o formulário
+    }
+
+    function carregarProdutos(){
+      //passar pela lista de produtos
+      for(let contador = 0; contador <= produtos.length - 1; contador++){
+        //desenhar uma linha na tabela
+        
+      }
     }
 
     function limparForm(){
@@ -69,15 +81,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Pizza Calabacon</td>
-        <td>R$ 67,00</td>
-        <td>Muita calabresa, só no meio</td>
-        <td>
-          <button>Alterar</button>
-          <button>Excluir</button>
-        </td>
-      </tr>
+           
     </tbody>
   </table>
 

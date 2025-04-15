@@ -29,3 +29,16 @@ html{
     align-items: center;
     justify-content: center;
 }
+table{
+    width: 100%;
+}
+th{
+    background-color: #cccccc;
+}
+/*somente as linhas ímpares do corpo da tabela ficarão na cor cinza*/
+tbody tr:nth-child(odd){ 
+    background-color: #f2f2f2;
+}
+td, th{
+    padding: 5px;
+}
