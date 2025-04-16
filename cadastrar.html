@@ -51,7 +51,21 @@
       //passar pela lista de produtos
       for(let contador = 0; contador <= produtos.length - 1; contador++){
         //desenhar uma linha na tabela
-        
+        let produto = produtos[contador]
+
+        let linha = document.createElement("tr")
+        linha.innerHTML = `<tr>
+          <td>${produto.nome}</td>
+          <td>R$ ${produto.preco}</td>
+          <td>${produto.descricao}</td>
+          <td>
+            <button>Alterar</button>
+            <button>Excluir</button>
+          </td>
+        </tr>`
+
+        let tbody = document.getElementsByTagName("tbody")[0]
+        tbody.appendChild(linha)
       }
     }
 
@@ -81,7 +95,7 @@
       </tr>
     </thead>
     <tbody>
-           
+      
     </tbody>
   </table>
 
