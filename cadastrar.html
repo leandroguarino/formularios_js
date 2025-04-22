@@ -7,6 +7,18 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script>
     let produtos = []
+
+    function getProximoId() {
+      if (produtos.length > 0){
+        //pega o último produto do vetor
+        let ultimoProduto = produtos[produtos.length - 1]
+        //pega o id do último produto do vetor
+        let maxId = ultimoProduto.id
+        return maxId+1
+      }else{
+        return 1 //quando não há nenhum produto, retorna 1, o primeiro ID
+      }
+    }
     
     function salvar() {
         let nome = document.getElementById("nome").value.trim()
@@ -22,7 +34,10 @@
           return false
         }
 
+        let proximoId = getProximoId()
+
         let novoProduto = {
+          "id": proximoId, 
           "nome": nome,
           "preco": preco,
           "descricao": descricao
