@@ -46,7 +46,21 @@
             "descricao": descricao
           }
 
-          produtos.push(novoProduto)
+          //produtos.push(novoProduto)
+          
+          fetch("http://localhost:3000/produtos", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json"
+            },
+            body: JSON.stringify(novoProduto)
+          }).then(response => {
+            getProdutos() //garante que atualiza a lista depois do post
+            alert("Cadastrou com sucesso")
+          }).catch(error => {
+            alert("Erro ao cadastrar")  
+          })
+
           console.log(produtos)
         }else{ //tem um produto sendo alterado 
           //procura o produto no vetor e altera-o
@@ -67,7 +81,8 @@
         }, 1000)
         limparForm()
 
-        carregarProdutos()
+        //mostrarProdutos()
+        //getProdutos()
 
         //zera a variável que guarda o produto que está sendo alterado
         idAlterado = null 
@@ -84,7 +99,7 @@
           break
         }
       }
-      carregarProdutos()
+      mostrarProdutos()
     }
 
     function alterar(id){
@@ -100,7 +115,7 @@
       }      
     }
 
-    function carregarProdutos(){
+    function mostrarProdutos(){
       let tbody = document.getElementsByTagName("tbody")[0]
       tbody.innerHTML = "" // Clear existing rows
       for(let contador = 0; contador <= produtos.length - 1; contador++){
@@ -144,14 +159,14 @@
     }
 
     function getProdutos(){
-      fetch("http://localhost:3000/clientes")
+      fetch("http://localhost:3000/produtos")
       .then(response => {
         return response.json()  
       })
       .then(data => {
         //pega os dados do back e armazena na variável "produtos"
         produtos = data
-        carregarProdutos()
+        mostrarProdutos()
       })
       .catch(error => {
         alert("Deu erro")
