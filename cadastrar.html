@@ -91,14 +91,14 @@
     }
 
     function excluir(id){
-      //busca o produto no vetor para excluir
-      for(let contador = 0; contador <= produtos.length - 1; contador++){
-        let produto = produtos[contador]
-        if (produto.id == id){ //se encontrou o produto buscado
-          produtos.splice(contador, 1) //remove o elemento do vetor
-          break
-        }
-      }
+      //chamar o back-end para excluir o produto
+      fetch("http://localhost:3000/produtos/" + id, {
+        method: "DELETE"
+      }).then(response => {
+        alert("Produto excluído com sucesso")
+      }).catch(error => {
+        alert("Erro ao excluir o produto")
+      })
       mostrarProdutos()
     }
 
@@ -159,7 +159,9 @@
     }
 
     function getProdutos(){
-      fetch("http://localhost:3000/produtos")
+      fetch("http://localhost:3000/produtos", {
+        method: "GET"
+      })
       .then(response => {
         return response.json()  
       })
