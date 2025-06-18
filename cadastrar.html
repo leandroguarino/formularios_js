@@ -63,16 +63,25 @@
 
           console.log(produtos)
         }else{ //tem um produto sendo alterado 
-          //procura o produto no vetor e altera-o
-          for(let contador = 0; contador <= produtos.length - 1; contador++){
-            let produto = produtos[contador]
-            if (produto.id == idAlterado){
-              produto.nome = nome
-              produto.preco = preco
-              produto.descricao = descricao
-              break //depois de alterar o produto, nao precisa buscar
-            }
+          novoProduto = {
+            "nome": nome,
+            "preco": preco,          
+            "descricao": descricao
           }
+
+          //chamar o back para alterar
+          fetch("http://localhost:3000/produtos/" + idAlterado, {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json"
+            },
+            body: JSON.stringify(novoProduto)
+          }).then(response => {
+            getProdutos()
+            alert("Produto alterado com sucesso")
+          }).catch(error => {
+            alert("Erro ao alterar produto")
+          })
         }
 
         document.getElementById("mensagem").style.display = "flex"
@@ -95,11 +104,11 @@
       fetch("http://localhost:3000/produtos/" + id, {
         method: "DELETE"
       }).then(response => {
+        getProdutos() //atualiza a lista de produtos pegando do back-end
         alert("Produto excluído com sucesso")
       }).catch(error => {
         alert("Erro ao excluir o produto")
       })
-      mostrarProdutos()
     }
 
     function alterar(id){
@@ -111,6 +120,7 @@
           document.getElementById("preco").value = produto.preco
           document.getElementById("descricao").value = produto.descricao
           idAlterado = produto.id //define que o produto será alterado
+          break
         }
       }      
     }
