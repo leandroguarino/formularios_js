@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos do Restaurante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script>
+        function salvar(){
+            let cliente = document.getElementById("cliente").value
+            let produtos = document.getElementsByName("produto")
+            let precos = document.getElementsByName("preco")
+            let quantidades = document.getElementsByName("quantidade")
+            
+            //pega os dados de cada linha do formulário
+            for(let contador = 0; contador < produtos.length; contador++){
+                let produto = produtos[contador]
+                let preco = precos[contador]
+                let quantidade = quantidades[contador]
+                console.log(produto.value, preco.value, quantidade.value)
+            }
+
+            return false
+        }
+    </script>
+</head>
+<body>
+    <h1>Novo pedido</h1>
+    <form name="formulario" id="formulario" method="post" onsubmit="return false">
+        <div class="mb-3">
+            <label>Nome do cliente</label>
+            <input type="text" name="cliente" id="cliente" />
+        </div>
+        <div class="linha">
+            <div class="produto">
+                <span>Produto</span>
+                <select name="produto">
+                    <option value="1">Produto 1</option>
+                </select>
+            </div>
+            <div class="valor">
+                <span>Preço</span>
+                <input type="number" name="preco" />
+            </div>
+            <div class="quantidade">
+                <span>Quantidade</span>
+                <input type="number" name="quantidade" />
+            </div>
+            <div class="adicionar">
+                <button name="adicionar">Adicionar</button>
+            </div>
+            <div class="excluir">
+                <button name="excluir">Excluir</button>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button onclick="salvar()">Salvar</button>
+        </div>
+    </form>
+</body>
+</html>
