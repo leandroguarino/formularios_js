@@ -22,6 +22,18 @@
 
             return false
         }
+
+        function adicionarProduto(){
+            //duplica o div class="linha" para criar um novo item do pedido no form
+            //pega o primeiro elemento da página que tem a classe "linha"
+            let divLinha = document.getElementsByClassName("linha")[0]
+            let novoDiv = document.createElement("div")
+            novoDiv.className = "linha"
+            //pega o conteúdo do divLinha e copia para o novoDiv
+            novoDiv.innerHTML = divLinha.outerHTML
+            let divProdutos = document.getElementById("produtos")
+            divProdutos.appendChild(novoDiv) //insere o div copiado no div de produtos
+        }
     </script>
 </head>
 <body>
@@ -31,26 +43,28 @@
             <label>Nome do cliente</label>
             <input type="text" name="cliente" id="cliente" />
         </div>
-        <div class="linha">
-            <div class="produto">
-                <span>Produto</span>
-                <select name="produto">
-                    <option value="1">Produto 1</option>
-                </select>
-            </div>
-            <div class="valor">
-                <span>Preço</span>
-                <input type="number" name="preco" />
-            </div>
-            <div class="quantidade">
-                <span>Quantidade</span>
-                <input type="number" name="quantidade" />
-            </div>
-            <div class="adicionar">
-                <button name="adicionar">Adicionar</button>
-            </div>
-            <div class="excluir">
-                <button name="excluir">Excluir</button>
+        <div id="produtos">
+            <div class="linha">
+                <div class="produto">
+                    <span>Produto</span>
+                    <select name="produto">
+                        <option value="1">Produto 1</option>
+                    </select>
+                </div>
+                <div class="valor">
+                    <span>Preço</span>
+                    <input type="number" name="preco" />
+                </div>
+                <div class="quantidade">
+                    <span>Quantidade</span>
+                    <input type="number" name="quantidade" />
+                </div>
+                <div class="adicionar">
+                    <button name="adicionar" onclick="adicionarProduto()">Adicionar</button>
+                </div>
+                <div class="excluir">
+                    <button name="excluir">Excluir</button>
+                </div>
             </div>
         </div>
         <div class="mb-3">
