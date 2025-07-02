@@ -11,14 +11,41 @@
             let produtos = document.getElementsByName("produto")
             let precos = document.getElementsByName("preco")
             let quantidades = document.getElementsByName("quantidade")
+
+            let novoPedido = {
+                cliente: cliente,
+                itens: [] //começa com uma lista vazia de itens do pedido
+            }
             
             //pega os dados de cada linha do formulário
             for(let contador = 0; contador < produtos.length; contador++){
                 let produto = produtos[contador]
                 let preco = precos[contador]
                 let quantidade = quantidades[contador]
-                console.log(produto.value, preco.value, quantidade.value)
+                // console.log(produto.value, preco.value, quantidade.value)
+
+                let novoItem = {
+                    preco: preco.value,
+                    quantidade: quantidade.value,
+                    produto: produto.value
+                }
+
+                //adiciona cada item na lista de pedidos
+                novoPedido.itens.push(novoItem)
             }
+
+            //enviar pedido para salvar no back-end
+            fetch("http://localhost:3000/pedidos", {
+                method: "POST",
+                headers: {
+                "Content-type": "application/json"
+                },
+                body: JSON.stringify(novoPedido)
+            }).then(response => {
+                alert("Pedido enviado com sucesso")
+            }).catch(error => {
+                alert("Erro ao cadastrar o pedido")  
+            })
 
             return false
         }
@@ -30,9 +57,19 @@
             let novoDiv = document.createElement("div")
             novoDiv.className = "linha"
             //pega o conteúdo do divLinha e copia para o novoDiv
-            novoDiv.innerHTML = divLinha.outerHTML
+            novoDiv.innerHTML = divLinha.innerHTML
             let divProdutos = document.getElementById("produtos")
             divProdutos.appendChild(novoDiv) //insere o div copiado no div de produtos
+        }
+
+        function excluirProduto(evento){
+            //remove da tela a linha clicada 
+            let botaoClicado = evento.target
+            //pega o elemento-pai do elemento-pai do botao Excluir que foi clicado
+            let linhaClicada = botaoClicado.parentNode.parentNode
+            //pega o pai para remover o elemento filho "linhaClicada"
+            let divProdutos = document.getElementById("produtos")
+            divProdutos.removeChild(linhaClicada)
         }
     </script>
 </head>
@@ -63,7 +100,7 @@
                     <button name="adicionar" onclick="adicionarProduto()">Adicionar</button>
                 </div>
                 <div class="excluir">
-                    <button name="excluir">Excluir</button>
+                    <button name="excluir" onclick="excluirProduto(event)">Excluir</button>
                 </div>
             </div>
         </div>
